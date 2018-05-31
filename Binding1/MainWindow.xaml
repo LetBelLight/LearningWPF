@@ -4,12 +4,56 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Binding1"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <StackPanel>
+        Title="MainWindow" Height="685.345" Width="800">
+    <StackPanel x:Name="stackPanel" Background="LightBlue">
+        <StackPanel.Resources>
+            <sys:String x:Key="myString">
+                菩提本无树，明镜亦非台。
+                本来无一物，何处惹尘埃。
+            </sys:String>
+        </StackPanel.Resources>
+        <StackPanel.DataContext>
+            <local:Student1 Id="6" Age="29" Name="Tim"/>
+        </StackPanel.DataContext>
         <TextBox x:Name="textBoxName" BorderBrush="Black" Margin="5"/>
         <Button Content="Add Age" Margin="5" Click="Button_Click"  />
         <TextBox x:Name="textBox1" Text="{Binding Path=Value,ElementName=slider1,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Black" Margin="5"></TextBox>
         <Slider x:Name="slider1" Maximum="100" Minimum="0" Margin="5"/>
+        <TextBlock x:Name="textBlock1" TextWrapping="Wrap"
+                   Text="{Binding Path=.,Source={StaticResource ResourceKey=myString}}" FontSize="16" Margin="5"/>
+        <Grid>
+            <StackPanel>
+                <TextBox Text="{Binding Path=Id}" Margin="5"/>
+                <TextBox Text="{Binding Path=Name}" Margin="5"/>
+                <TextBox Text="{Binding Path=Age}" Margin="5"/>
+            </StackPanel>
+        </Grid>
+        <TextBlock Text="Student ID:" FontWeight="Bold" Margin="5"/>
+        <TextBox x:Name="textBoxId" Margin="5"/>
+        <TextBlock Text="Student List:" FontWeight="Bold" Margin="5"/>
+        <ListBox x:Name="listBoxStudents" Height="110" Margin="5">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Path=Id}" Width="360"/>
+                        <TextBlock Text="{Binding Path=Name}" Width="90"/>
+                        <TextBlock Text="{Binding Path=Age}" Width="120"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <ListView x:Name="listViewStudent" Height="130" Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Id" Width="60" DisplayMemberBinding="{Binding Id}"/>
+                    <GridViewColumn Header="Name" Width="180" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Age" Width="130" DisplayMemberBinding="{Binding Age}"/>
+                </GridView>
+            </ListView.View>
+           
+        </ListView>
+        <Button Content="Load" Height="30" Margin="5" Click="loadButton_Click"/>
     </StackPanel>
 </Window>

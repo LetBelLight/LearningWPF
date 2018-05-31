@@ -22,6 +22,15 @@ namespace Binding1
     public partial class MainWindow : Window
     {
         Student stu;
+        List<Student1> stuList1 = new List<Student1>()
+            {
+                new Student1(){Id=0,Name="Tim",Age=29},
+                new Student1(){Id=1,Name="Tom",Age=28},
+                new Student1(){Id=2,Name="Bob",Age=27},
+                new Student1(){Id=3,Name="Bib",Age=26},
+                new Student1(){Id=4,Name="Tony",Age=25},
+                new Student1(){Id=5,Name="Mike",Age=24}
+            };
         public MainWindow()
         {
             InitializeComponent();
@@ -33,11 +42,24 @@ namespace Binding1
             binding.Path = new PropertyPath("Name");
 
             BindingOperations.SetBinding(this.textBoxName, TextBox.TextProperty, binding);
+
+            
+
+            this.listBoxStudents.ItemsSource = stuList1;
+            //this.listBoxStudents.DisplayMemberPath ="Name";
+
+            Binding binding1 = new Binding("SelectedItem.Id") { Source = this.listBoxStudents };
+            this.textBoxId.SetBinding(TextBox.TextProperty, binding1);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             stu.Name += "name";
+        }
+        
+        private void loadButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.listViewStudent.ItemsSource = stuList1;
         }
     }
     class Student:INotifyPropertyChanged
@@ -55,5 +77,11 @@ namespace Binding1
                 }
             }
         }
+    }
+    public class Student1
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
     }
 }
