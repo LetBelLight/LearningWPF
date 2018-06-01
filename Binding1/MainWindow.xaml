@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Binding1"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="685.345" Width="800">
-    <StackPanel x:Name="stackPanel" Background="LightBlue">
+        Title="MainWindow" Height="1000" Width="800">
+    <StackPanel x:Name="stackPanel" Background="LightBlue" Margin="0,0,0,-404">
         <StackPanel.Resources>
             <sys:String x:Key="myString">
                 菩提本无树，明镜亦非台。
@@ -19,7 +19,7 @@
         </StackPanel.DataContext>
         <TextBox x:Name="textBoxName" BorderBrush="Black" Margin="5"/>
         <Button Content="Add Age" Margin="5" Click="Button_Click"  />
-        <TextBox x:Name="textBox1" Text="{Binding Path=Value,ElementName=slider1,UpdateSourceTrigger=PropertyChanged}" BorderBrush="Black" Margin="5"></TextBox>
+        <TextBox x:Name="textBox1"  BorderBrush="Black" Margin="5"></TextBox>
         <Slider x:Name="slider1" Maximum="100" Minimum="0" Margin="5"/>
         <TextBlock x:Name="textBlock1" TextWrapping="Wrap"
                    Text="{Binding Path=.,Source={StaticResource ResourceKey=myString}}" FontSize="16" Margin="5"/>
@@ -55,5 +55,28 @@
            
         </ListView>
         <Button Content="Load" Height="30" Margin="5" Click="loadButton_Click"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Grid.Row="0" x:Name="textBoxArg1" Margin="5"/>
+            <TextBlock Grid.Column="1" Grid.Row="0">+</TextBlock>
+            <TextBox Grid.Column="2" Grid.Row="0" x:Name="textBoxArg2" Margin="5"/>
+            <TextBlock Grid.Column="3" Grid.Row="0">=</TextBlock>
+            <TextBox Grid.Column="4" Grid.Row="0" x:Name="textBoxResult" Margin="5"/>
+        </Grid>
+        <Grid x:Name="g1" Background="Red" Margin="10" Height="556">
+            <DockPanel x:Name="d1" Background="Orange" Margin="10">
+                <Grid x:Name="g2" Background="Yellow" Margin="10">
+                    <DockPanel x:Name="d2" Background="LawnGreen" Margin="10">
+                        <TextBox Text="{Binding RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type DockPanel},AncestorLevel=2},Path=Name}" x:Name="textBox2" FontSize="24" Margin="10"/>
+                    </DockPanel>
+                </Grid>
+            </DockPanel>
+        </Grid>
     </StackPanel>
 </Window>
