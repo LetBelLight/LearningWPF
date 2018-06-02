@@ -73,10 +73,12 @@ namespace Binding2
             switch(c)
             {
                 case Category.Bomber:
-                    //return new BitmapImage(new Uri(@"\Icons\Bomber.png",UriKind.Absolute));
-                    return @"\Icons\Bomber.png";
+                    string path = @".\Icons\Bomber.jpg";
+                    BitmapImage bi= new BitmapImage(new Uri(path, UriKind.Relative));
+                    return bi;
+                    //return @"\Icons\Bomber.png";
                 case Category.Fighter:
-                    //return new BitmapImage(new Uri(@"\Icons\Fighter.png",UriKind.Relative));
+                    //return new BitmapImage(new Uri(@"/Icons/Fighter.jpg", UriKind.Relative));
                     return @"\Icons\Fighter.png";
                 default:
                     return null;
